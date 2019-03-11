@@ -2,7 +2,6 @@ from requests.auth import HTTPBasicAuth
 import requests
 import json
 from getpass import getpass
-import plotly
 import matplotlib.pyplot as plt
 from get_connection import get_connection
 
