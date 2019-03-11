@@ -2,7 +2,7 @@
  "from" : 0, "size" : 10000,
  "query": {
    "query_string": {
-     "query": "(source:bootinfo.log OR source:stated.log OR source:reboot.log) AND (node_id:hp101) AND beat.hostname: boss.utah.cloudlab.us"
+     "query": "(source:bootinfo.log OR source:stated.log OR source:reboot.log)"
    }
  }
 }
