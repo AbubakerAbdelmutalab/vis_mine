@@ -22,20 +22,18 @@ file=open('file','a')
 time = []
 version = []
 filter_version = []
-category = {"REQUEST": 0, "REPLY(0)": 0, "REPLY(1)": 0, "SEND": 0}
+category = {"disconnect": 0, "Invalid user": 0, "Failed password": 0}
 print(len(hits))
 for hit in hits:
 	log_entry= hit['_source']
 	time.append(log_entry['@timestamp'])
 	message = log_entry['message']
-	if "REQUEST" in message:
-		category["REQUEST"] += 1
-	elif "REPLY(0)" in message:
-		category["REPLY(0)"] += 1
-	elif "REPLY(1)" in message:
-		category["REPLY(1)"] += 1
-	elif "SEND" in message:
-		category["SEND"] += 1
+	if "disconnect" in message:
+		category["disconnect"] += 1
+	elif "Invalid user" in message:
+		category["Invalid user"] += 1
+	elif "Failed password" in message:
+		category["Failed password"] += 1
 	version.append(log_entry['@version'])
 	filter_version.append(log_entry['logstash_filter_version'])
 	#print(message)
@@ -44,6 +42,6 @@ for hit in hits:
 print category
 plt.bar(list(category.keys()), list(category.values()))
 #plt.hist(version)
-#plt.show()
-plt.savefig("graphs/category_from_bootinfo.png")
+plt.show()
+plt.savefig("graphs/authlog2.png")
 
