@@ -2,7 +2,7 @@
  "from" : 0, "size" : 10000,
  "query": {
    "query_string": {
-     "query": "(source:bootinfo.log)"
+     "query": "(source:auth.log)"
    }
  }
 }
