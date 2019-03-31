@@ -1,0 +1,22 @@
+{
+ "from" : 0, "size" : 10000,
+ "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "(source:auth.log)"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-1d/d",
+              "lt": "now/d"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -42,6 +42,6 @@ for hit in hits:
 print(category)
 plt.bar(list(category.keys()), list(category.values()))
 #plt.hist(version)
-plt.show()
-plt.savefig("graphs/authlog2.png")
+#plt.show()
+plt.savefig("graphs/authlog.png")
 
