@@ -39,7 +39,7 @@ for hit in hits:
 	#print(message)
 	#file.write(message)
 #file.close()
-print category
+print(category)
 plt.bar(list(category.keys()), list(category.values()))
 #plt.hist(version)
 plt.show()
