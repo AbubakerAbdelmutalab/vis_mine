@@ -148,7 +148,7 @@ for line in data:
 		print(msg)
 		continue
 	if user==None:
-		user = ''
+		user = 'UNKNOWN'
 
 	processed.append((type,timestamp,clust,node,ip,user))
 
