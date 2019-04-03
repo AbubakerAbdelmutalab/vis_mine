@@ -1,44 +1,50 @@
-var arcs = new Datamap({
+var map = new Datamap({
     element: document.getElementById("container"),
     scope: 'world',
 });
-
-// Arcs coordinates can be specified explicitly with latitude/longtitude,
-// or just the geographic center of the state/country.
-arcs.arc([
-    {
+var data = JSON.parse(data); //import the data
+var arcs = []
+var i = 0;
+//create the array of arcs using 300 data points
+while (arcs.length < 300) {
+    if (isNaN(data[i].latitude)) {
+        i++;
+        continue;
+    }
+    arc = {
         origin: {
-            latitude: 40.639722,
-            longitude: -73.778889
+            latitude: data[i].latitude,
+            longitude: data[i].longitude
         },
+        //dont have real destinations yet so all will go to utah
         destination: {
-            latitude: 5.660759,
-            longitude: -66.055238
-        }
-    },
-    {
-        origin: {
-            latitude: 40,
-            longitude: 111
-        },
-        destination: {
-            latitude: 25.793333,
-            longitude: -80.290556
-        },
-        options: {
-            strokeWidth: 5,
-            strokeColor: 'rgba(100, 10, 200, 0.4)',
-            greatArc: true
-        }
-    },
-    {
-        origin: {
-            latitude: 39.861667,
-            longitude: -104.673056
-        },
-        destination: {
-            latitude: 39.857420,
-            longitude: 126.798484
+            latitude: 40.767584,
+            longitude: -111.844630
         }
     }
-], { strokeWidth: 5, arcSharpness: 1.4 });
+    //color the arc line based on the login type
+    switch (data[i].type) {
+        case "INVALID_USER":
+            arc.options = {
+                strokeWidth: 2,
+                strokeColor: 'red',
+                greatArc: true
+            };
+            break;
+        case "FAILED_PASSWORD":
+            arc.options = {
+                strokeWidth: 2,
+                strokeColor: 'yellow',
+                greatArc: true
+            };
+        default:
+            arc.options = {
+                strokeWidth: 2,
+                strokeColor: 'green',
+                greatArc: true
+            };
+    }
+    arcs.push(arc);
+    i++;
+}
+map.arc(arcs, { strokeWidth: 2, arcSharpness: 1.4 });
