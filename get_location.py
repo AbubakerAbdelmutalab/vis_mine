@@ -26,6 +26,7 @@ for line in data[1:]:
 		line.append('UNKNOWN')
 		line.append('UNKNOWN')
 		line.append('UNKNOWN')
+	print(','.join([str(i) for i in line]))
 	time.sleep(.4)
 
 result = ''
