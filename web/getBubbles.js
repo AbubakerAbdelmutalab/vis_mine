@@ -2,7 +2,7 @@ function getBubbles(types,section) {
 	var i = (section-1)*(data.length/10)
 	var max = (section)*(data.length/10)
 	var countryCount = new Map()
-	while (i < section) {
+	while (i < max) {
 		var msg = data[i]
 		if (types.indexOf(msg.type) >= 0 && !(msg.country === "UNKNOWN")) {
 			//if country is not yet mapped, create a new entry
