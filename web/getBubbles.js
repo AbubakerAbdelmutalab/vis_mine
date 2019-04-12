@@ -1,7 +1,8 @@
-function getBubbles(types) {
-	var i = 0
+function getBubbles(types,section) {
+	var i = (section-1)*(data.length/10)
+	var max = (section)*(data.length/10)
 	var countryCount = new Map()
-	while (i < data.length) {
+	while (i < section) {
 		var msg = data[i]
 		if (types.indexOf(msg.type) >= 0 && !(msg.country === "UNKNOWN")) {
 			//if country is not yet mapped, create a new entry
@@ -19,7 +20,7 @@ function getBubbles(types) {
 	var bubbles = [];
 	countryCount.forEach(function (value, key) {
     bubble = {
-        radius: 5 + (value.count*.1), //increase the radius of the bubble for every login attempt by the country
+        radius: 5*Math.log(value.count) + value.count*.1/Math.log(value.count), //increase the radius of the bubble for every login attempt by the country
         loginAttempts: value.count,
         country: key,
         latitude: value.latitude,
