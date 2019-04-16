@@ -7,23 +7,29 @@
 </head>
 
 <body>
-    <div id="container" style="position: relative; width: 90%; height: 90%;"></div>
-    <div style="position: absolute; bottom:100; left: 0;">
-        <input type="checkbox" id="INVALID_USER"  onclick="boxChecked()"><span class="checkText">INVALID_USER</span><br>
-        <input type="checkbox" id="FAILED_PASSWORD"  onclick="boxChecked()">FAILED_PASSWORD<br>
-        <input type="checkbox" id="DISCONNECT"  onclick="boxChecked()">DISCONNECT<br>
-        <input type="checkbox" id="DISCONNECT_INVALID_USER"  onclick="boxChecked()">DISCONNECT_INVALID_USER<br>
-        <input type="checkbox" id="ACCEPT_PUBLIC_KEY"  onclick="boxChecked()">ACCEPT_PUBLIC_KEY<br>
-        <input type="checkbox" id="DISCONNECT_PREAUTH"  onclick="boxChecked()">DISCONNECT_PREAUTH<br>
-        <input type="checkbox" id="REVERSE_MAPPING"  onclick="boxChecked()">REVERSE_MAPPING<br>
-        <input type="checkbox" id="TOO_MANY_PASSWORD_ATTEMPTS"  onclick="boxChecked()">TOO_MANY_PASSWORD_ATTEMPTS<br>
-        <input type="checkbox" id="UNABLE_TO_NEGOTIATE"  onclick="boxChecked()">UNABLE_TO_NEGOTIATE<br>
-        <input type="checkbox" id="NEW_SESSION"  onclick="boxChecked()">NEW_SESSION<br>
-        <input type="checkbox" id="REMOVE_SESSION"  onclick="boxChecked()">REMOVE_SESSION<br>
-        <input type="checkbox" id="NO_IDENTIFICATION"  onclick="boxChecked()">NO_IDENTIFICATION<br>
+    <div id="container" style="position: relative; width: 75%; height: 75%;"></div>
+    <div class="checkBoxContainer">
+        <input type="checkbox" id="ALL" onclick="checkAll()">All<br>
+        <input type="checkbox" id="INVALID_USER" onclick="boxChecked()">Invalid Username<br>
+        <input type="checkbox" id="FAILED_PASSWORD" onclick="boxChecked()">Incorrect Password<br>
+        <input type="checkbox" id="DISCONNECT_PREAUTH" onclick="boxChecked()">Disconnect before login attempt<br>
+        <input type="checkbox" id="DISCONNECT_INVALID_USER" onclick="boxChecked()">Disconnect Invalid Username Login Attempt<br>
+        <input type="checkbox" id="DISCONNECT" onclick="boxChecked()">Other Disconnect<br>
+        <input type="checkbox" id="ACCEPT_PUBLIC_KEY" onclick="boxChecked()">Successful remote login<br>
+        <input type="checkbox" id="REVERSE_MAPPING" onclick="boxChecked()">DNS ID Does not Match User<br>
+        <input type="checkbox" id="TOO_MANY_PASSWORD_ATTEMPTS" onclick="boxChecked()">Too Many Password Attempts<br>
+        <input type="checkbox" id="UNABLE_TO_NEGOTIATE" onclick="boxChecked()">Failed SSH Key<br>
+        <input type="checkbox" id="NEW_SESSION" onclick="boxChecked()">Successful Login<br>
+        <input type="checkbox" id="REMOVE_SESSION" onclick="boxChecked()">Session Terminated<br>
+        <input type="checkbox" id="NO_IDENTIFICATION" onclick="boxChecked()">Login Attempt Without Identification<br>
     </div>
     <div class="slidecontainer">
-            <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+        <div class="slidecontainer">
+            <button onclick="allTime()" id="timeButton">
+                View Data by Time Period
+            </button>
+        </div>
+        <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
     </div>
     <script src="/project.js"></script>
 </body>
