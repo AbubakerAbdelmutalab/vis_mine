@@ -2,13 +2,12 @@ import re
 
 
 data = []
-with open('logs/10krange.txt') as f:
+with open('logs/10krange.txt') as f: # open a file containing log messages
 	for line in f.readlines()[1:]:
 		data.append(line.split('\t'))
 
 
 # TYPES
-
 INVALID_USER = 'INVALID_USER'
 FAILED_PASSWORD = 'FAILED_PASSWORD'
 DISCONNECT = 'DISCONNECT'
@@ -23,6 +22,7 @@ NEW_SESSION = 'NEW_SESSION'
 REMOVE_SESSION = 'REMOVE_SESSION'
 NO_IDENTIFICATION = 'NO_IDENTIFICATION'
 
+# some regex patterns to match all the types
 ip_pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
 disc_inv_pattern = r'disconnected\sfrom\sinvalid\suser\s(.+)'
 inv_pass = r'failed\spassword\sfor\s(.+)'
@@ -42,6 +42,8 @@ no_id = r'did\snot\sreceive\sidentification\sstring'
 
 
 processed = []
+
+# match all the types
 for line in data:
 	timestamp = line[0]
 	clust = None
@@ -51,16 +53,18 @@ for line in data:
 	user = None
 
 	msg = line[1].lower()
+	msg_split = line[1].split()
+	clust = msg_split[3] # get cluster name
+	node = msg_split[4] # get node name 
+
+	if 'ssh' in node: # extra case for node name not being in log message
+		node = 'UNKNOWN'
+
 	found = re.search(ip_pattern,msg)
 	if found: # only use messages with a source ip
 		ip = found.group(0)
 	else:
 		ip = "UNKNOWN"
-	msg_split = line[1].split()
-	clust = msg_split[3]
-	node = msg_split[4]
-	if 'ssh' in node:
-		node = 'UNKNOWN'
 
 	found = re.search(disc_inv_pattern,msg)
 	if found and type==None:
@@ -70,7 +74,7 @@ for line in data:
 	found = re.search(inv_pass,msg)
 	if found and type==None:
 		user = found.group(1)
-		if user != 'root':
+		if user != 'root': # don't put usernames in the processed files for privacy
 			user = 'other'
 		type = FAILED_PASSWORD
 
@@ -144,19 +148,21 @@ for line in data:
 	if found and type==None:
 		type = NO_IDENTIFICATION
 
+	# if type doesn't match any of the above, print it and continue
 	if type==None:
-		print(msg)
+		print(msg.strip())
 		continue
-	if user==None:
+	if user==None: # don't append None to the csv
 		user = 'UNKNOWN'
 
 	processed.append((type,timestamp,clust,node,ip,user))
 
-#print(processed[:500])
+# make a csv header
 result = 'type,timestamp,cluster,node,sourceip,user\n'
 for line in processed:
 	result += ','.join([str(i) for i in line])+'\n'
 
-with open('logs/processed_test.csv','w') as f:
+# write csv
+with open('demo_logs/processed.csv','w') as f:
 	f.write(result)
 
