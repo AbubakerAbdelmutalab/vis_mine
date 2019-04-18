@@ -18,10 +18,16 @@ types.forEach((type) => {
     checkboxes.push(document.getElementById(type));
 });
 var data = JSON.parse(data); //import the data included in the html file
+data.sort(sortDate)
+
 var slider = document.getElementById("myRange");
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function () {
     boxChecked();
+}
+
+function sortDate(a, b) {
+    return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
 }
 
 function checkAll() {
