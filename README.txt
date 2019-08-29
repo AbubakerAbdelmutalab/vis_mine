@@ -1,4 +1,4 @@
-Our preprocessing code has been set up as a demo version. Following the step-by-step instructions will create copies of all files used for the project and will not overwrite the submission.
+The preprocessing code has been set up as a demo version. Following the step-by-step instructions will create copies of all files used for the project and will not overwrite the submission.
 
 
 How to run:
