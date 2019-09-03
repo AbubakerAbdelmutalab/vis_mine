@@ -1,6 +1,5 @@
 import re
 
-
 data = []
 with open('logs/10krange.txt') as f: # open a file containing log messages
 	for line in f.readlines()[1:]:
